@@ -325,23 +325,26 @@ router.setRoutes(routes);
 ====
 Because the client-side bootstrapping was introduced in Vaadin 15, the Java main layout does no longer directly correspond to the initial HTML page.
 
-Instead, the `VaadinAppShell` class is introduced for configuring the initial HTML.
+Instead, the `AppShellConfigurator` class is introduced for configuring the initial HTML.
 
-From now on, the Java annotations related to the initial HTML should be , such as `@Meta`, `@Viewport`, `@Inline`, `@PWA`, should be declared on the `VaadinAppShell` subclass.
+From now on, the Java annotations related to the initial HTML should be , such as `@Meta`, `@Viewport`, `@Inline`, `@PWA`, should be declared on the `AppShellConfigurator` subclass.
 
 .AppShell.java
 [source, java]
 ----
 package ...;
 
-import com.vaadin.flow.component.page.VaadinAppShell;
+import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
 @Theme(value = Lumo.class)
 @PWA(name = "Bookstore", shortName = "Bookstore")
-public class AppShell extends VaadinAppShell {
+public class AppShell extends AppShellConfigurator {
+  @Override
+  public void configurePage(AppShellSettings settings) {
+  }
 }
 ----
 ====
